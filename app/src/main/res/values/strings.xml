@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ArachnophobiaVR</string>
+    <string name="patient_one_desc">Type 1 is not afraid of spiders. His fear level will increase linear in a small amount. The patient only reaches max. 40% of full fear level.</string>
+    <string name="patient_two_desc">Type 2 tries to avoid spiders. His fear level is already increased on the start and wil continue to increase faster as the spider comes closer.</string>
+    <string name="patient_three_desc">Type 3 is afraid that the spider will hurt him. His fear level is low at the beginning, but will increase fast, if the spider has crossed a certain point.</string>
+</resources>

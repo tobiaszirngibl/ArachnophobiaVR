@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardScrolling"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardElevation="2sp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/graph" />
+
+            <TextView
+                android:id="@+id/title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/graph"
+                android:maxLines="3"
+                android:layout_marginTop="8dp"
+                android:text="Patient Fear Level"
+                android:textColor="#222"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title2"
+                android:maxLines="3"
+                android:text="Current Score of Fear"
+                android:textColor="#666"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/fullscreen"
+                android:id="@+id/imgFullscreen2"
+                android:layout_margin="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/title2"
+                android:onClick="showFullscreen"/>
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="24dp"
+        android:text="Interactions"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/resumeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resume Session"
+        android:visibility="gone"
+        android:onClick="resumeClicked"></Button>
+
+    <Button
+        android:id="@+id/comfortButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comfort"
+        android:onClick="comfortClicked"></Button>
+
+    <Button
+        android:id="@+id/syringeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Syringe"
+        android:onClick="syringeClicked"></Button>
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Session"
+        android:onClick="stopClicked"></Button>
+
+</LinearLayout>
