@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     private int calcPFL(double distance, int patientType) {
         double pflScore = 0;
 
+        // Different function for different types
         switch (patientType) {
             case 1:
                 pflScore = Math.exp((Math.sqrt(distance) * distance) / 270) - 1;

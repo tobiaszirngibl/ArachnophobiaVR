@@ -3,30 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/tobias/.android/build-cache/5d8440715cb68bf7c763d57cdd8a1372ffd47a00/output/jars/classes.jar"
+        jar="/Users/tobias/Desktop/Projekte/Uni/KI Ludwig/ArachnophobiaVR/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
-        <dex dex="/Users/tobias/Downloads/ArachnophobiaVR/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a2e8b9ce3ca2894285594f30f37f01a987b76994/classes.dex" />
+        sha1="872e7e6e78e0f1df6864ee3d7bb2157be6e1038e">
+        <dex dex="/Users/tobias/Desktop/Projekte/Uni/KI Ludwig/ArachnophobiaVR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_73579f95fbabd2e51d2094d553c3fc3054df5431/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/tobias/Downloads/ArachnophobiaVR/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="f35c760ad1bad9467fcf5773a7b6f15d868a9c30">
-        <dex dex="/Users/tobias/Downloads/ArachnophobiaVR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_a55476f64abfe080de7f6920ea79132c8d241068/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/tobias/Downloads/ArachnophobiaVR/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="/Users/tobias/Desktop/Projekte/Uni/KI Ludwig/ArachnophobiaVR/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/tobias/Downloads/ArachnophobiaVR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_63905e0db191b608d25a751042dea9390e9844bf/classes.dex" />
+        <dex dex="/Users/tobias/Desktop/Projekte/Uni/KI Ludwig/ArachnophobiaVR/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_b7ff6842f01d1779df4d180125c18ebab4edf58b/classes.dex" />
     </item>
 
 </items>
