@@ -1,14 +1,11 @@
 package com.example.tobias.arachnophobiavr;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jjoe64.graphview.GraphView;
@@ -19,10 +16,18 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    final int DEBUG_LEVEL = 2;
+
     private final Handler mHandler = new Handler();
     private Runnable mTimer1;
     private LineGraphSeries<DataPoint> mSeries1;
+    private UnityConnection unityConn;
+
     private int patient_type;
+
+    public static final int UNITY_ACTION_PAUSE_SPIDER = 0;
+    public static final int UNITY_ACTION_RESET_SPIDER = 1;
+    public static final int UNITY_ACTION_REMOVE_SPIDER = 2;
 
     private Button resumeButton;
     private Button comfortButton;
@@ -43,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         comfortButton = (Button) findViewById(R.id.comfortButton);
         syringeButton = (Button) findViewById(R.id.syringeButton);
         stopButton = (Button) findViewById(R.id.stopButton);
+
+        unityConn = new UnityConnection();
+        unityConn.init("192.168.1.21");
+        if (DEBUG_LEVEL > 0) Log.d("UNITY", "Success! Unity connection initialized!");
     }
 
     @Override
@@ -57,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         mHandler.postDelayed(mTimer1, 300);
-
     }
 
     @Override
@@ -78,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return values;
     }
-
 
     private int calcPFL(double distance, int patientType) {
         double pflScore = 0;
@@ -113,28 +120,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resumeClicked(View view) {
+        short r = unityConn.receive();
+        Log.d("BUTTON", "received: " + r);
+        unityConn.send(UNITY_ACTION_RESET_SPIDER);
         comfortButton.setVisibility(View.VISIBLE);
         syringeButton.setVisibility(View.VISIBLE);
         resumeButton.setVisibility(View.GONE);
     }
 
     public void comfortClicked(View view) {
+        unityConn.send(UNITY_ACTION_PAUSE_SPIDER);
         comfortButton.setVisibility(View.GONE);
         syringeButton.setVisibility(View.GONE);
         resumeButton.setVisibility(View.VISIBLE);
     }
 
     public void syringeClicked(View view) {
+        unityConn.send(UNITY_ACTION_PAUSE_SPIDER);
         comfortButton.setVisibility(View.GONE);
         syringeButton.setVisibility(View.GONE);
         resumeButton.setVisibility(View.VISIBLE);
     }
 
     public void stopClicked(View view) {
+        unityConn.send(UNITY_ACTION_REMOVE_SPIDER);
         Intent intent = new Intent(MainActivity.this, StartScreen.class);
         startActivity(intent);
     }
-
-
-
 }
