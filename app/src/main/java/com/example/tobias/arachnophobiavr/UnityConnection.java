@@ -96,7 +96,7 @@ class UnityConnection {
 
                 try
                 {
-                    sleep(5);
+                    sleep(200);
                 }
                 catch (InterruptedException e)
                 {

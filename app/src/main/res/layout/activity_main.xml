@@ -18,20 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp">
-
-            <com.jjoe64.graphview.GraphView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:id="@+id/graph" />
+            
+           
 
             <TextView
-                android:id="@+id/title2"
+                android:id="@+id/fearLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/graph"
                 android:maxLines="3"
                 android:layout_marginTop="8dp"
-                android:text="Patient Fear Level"
+                android:text="0"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="22dp" />
@@ -39,27 +35,92 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title2"
+                android:layout_below="@+id/fearLevel"
                 android:maxLines="3"
-                android:text="Current Score of Fear"
+                android:text="Current Fear Level"
                 android:textColor="#666"
                 android:textSize="14dp" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/fullscreen"
-                android:id="@+id/imgFullscreen2"
-                android:layout_margin="5dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/title2"
-                android:onClick="showFullscreen"/>
 
 
         </RelativeLayout>
 
 
     </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardScrolling2"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardElevation="2sp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
+
+
+
+            <TextView
+                android:id="@+id/lastRewardLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:layout_marginTop="8dp"
+                android:text="0"
+                android:textColor="#222"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lastRewardLevel"
+                android:maxLines="3"
+                android:text="Last Reward Score"
+                android:textColor="#666"
+                android:textSize="14dp"
+                android:id="@+id/lastRewardLevelText" />
+
+            
+            <TextView
+                android:id="@+id/totalRewardScoreText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/lastRewardLevelText"
+                android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp"
+                android:layout_toEndOf="@+id/lastRewardLevelText"
+                android:layout_toRightOf="@+id/lastRewardLevelText"
+                android:maxLines="3"
+                android:text="Total Reward Score"
+                android:textColor="#666"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/totalRewardScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/totalRewardScoreText"
+                android:layout_alignLeft="@+id/totalRewardScoreText"
+                android:layout_alignStart="@+id/totalRewardScoreText"
+                android:maxLines="3"
+                android:layout_marginTop="8dp"
+                android:text="0"
+                android:textColor="#222"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+    
+    
 
     <TextView
         android:layout_width="wrap_content"
