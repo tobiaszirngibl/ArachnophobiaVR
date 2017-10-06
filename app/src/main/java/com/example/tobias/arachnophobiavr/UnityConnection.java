@@ -43,6 +43,10 @@ class UnityConnection {
         cachedPool.submit(createSendRunnable((short)(s)));
     }
 
+    public void close() {
+        rt.interrupt();
+        sock.close();
+    }
     private void setIp(String ip)
     {
         try
@@ -78,7 +82,7 @@ class UnityConnection {
             byte message[];
             DatagramPacket packet;
 
-            while(this.isAlive()) {
+            while(!this.isInterrupted()) {
                 message = new byte[1];
                 packet = new DatagramPacket(message, message.length, address, port);
 

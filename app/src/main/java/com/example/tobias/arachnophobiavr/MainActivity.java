@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private int patient_type;
 
     private TextView fearLevel;
+    private TextView curRewardLevel;
+    private TextView totRewardLevel;
 
     public static final int UNITY_ACTION_PAUSE_SPIDER = 0;
     public static final int UNITY_ACTION_RESET_SPIDER = 1;
@@ -30,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
     private Button syringeButton;
     private Button stopButton;
 
+    private RewardScore rs;
+
+    private int fearLevelScore = 0;
+    private int currentRewardScore = 0;
+    private int totalRewardScore = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fearLevel = (TextView) findViewById(R.id.fearLevel);
-
+        curRewardLevel = (TextView) findViewById(R.id.lastRewardLevel);
+        totRewardLevel = (TextView) findViewById(R.id.totalRewardScore);
+        rs = new RewardScore();
 
         patient_type = getIntent().getIntExtra("Type", 0);
 
@@ -47,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
         stopButton = (Button) findViewById(R.id.stopButton);
 
         unityConn = new UnityConnection();
-        unityConn.init("192.168.137.1");
+        unityConn.init("192.168.0.14");
         if (DEBUG_LEVEL > 0) Log.d("UNITY", "Success! Unity connection initialized!");
+        unityConn.send(UNITY_ACTION_RESET_SPIDER);
         setDataToGraph();
     }
 
@@ -59,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            fearLevel.setText(""+calcPFL(unityConn.receive(),patient_type));
+                            fearLevelScore = calcPFL(unityConn.receive(),patient_type) - totalRewardScore;
+                            fearLevel.setText(""+fearLevelScore);
                         }
                     });
             }
@@ -114,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
         comfortButton.setVisibility(View.VISIBLE);
         syringeButton.setVisibility(View.VISIBLE);
         resumeButton.setVisibility(View.GONE);
+
+        rs.stopCalming();
+        currentRewardScore = rs.getFearRV();
+        totalRewardScore = totalRewardScore + currentRewardScore;
+
+        totRewardLevel.setText(""+totalRewardScore);
+        curRewardLevel.setText(""+currentRewardScore);
+
     }
 
     public void comfortClicked(View view) {
@@ -121,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
         comfortButton.setVisibility(View.GONE);
         syringeButton.setVisibility(View.GONE);
         resumeButton.setVisibility(View.VISIBLE);
+
+        rs.startCalming(rs.METHOD_CALMING, fearLevelScore);
     }
 
     public void syringeClicked(View view) {
@@ -128,13 +150,19 @@ public class MainActivity extends AppCompatActivity {
         comfortButton.setVisibility(View.GONE);
         syringeButton.setVisibility(View.GONE);
         resumeButton.setVisibility(View.VISIBLE);
+
+        rs.startCalming(rs.METHOD_SYRINGE, fearLevelScore);
+
     }
 
     public void stopClicked(View view) {
         unityConn.send(UNITY_ACTION_REMOVE_SPIDER);
+        unityConn.close();
         Intent intent = new Intent(MainActivity.this, StartScreen.class);
         startActivity(intent);
+        finish();
     }
+
 
 
 }
