@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         stopButton = (Button) findViewById(R.id.stopButton);
 
         unityConn = new UnityConnection();
-        unityConn.init("192.168.0.14");
+        unityConn.init("192.168.137.1");
         if (DEBUG_LEVEL > 0) Log.d("UNITY", "Success! Unity connection initialized!");
         unityConn.send(UNITY_ACTION_RESET_SPIDER);
         setDataToGraph();
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            fearLevelScore = calcPFL(unityConn.receive(),patient_type) - totalRewardScore;
+                            fearLevelScore = calcPFL(unityConn.receiveData(), patient_type) - totalRewardScore;
                             fearLevel.setText(""+fearLevelScore);
                         }
                     });
@@ -82,9 +82,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-            setDataToGraph();
-
+        setDataToGraph();
     }
 
     @Override
@@ -92,9 +90,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
     
-
-
-
 
     private int calcPFL(double distance, int patientType) {
         double pflScore = 0;
@@ -117,11 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     public void resumeClicked(View view) {
-        short r = unityConn.receive();
-        Log.d("BUTTON", "received: " + r);
         unityConn.send(UNITY_ACTION_RESET_SPIDER);
         comfortButton.setVisibility(View.VISIBLE);
         syringeButton.setVisibility(View.VISIBLE);
@@ -133,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
 
         totRewardLevel.setText(""+totalRewardScore);
         curRewardLevel.setText(""+currentRewardScore);
-
     }
 
     public void comfortClicked(View view) {
@@ -157,12 +147,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopClicked(View view) {
         unityConn.send(UNITY_ACTION_REMOVE_SPIDER);
-        unityConn.close();
         Intent intent = new Intent(MainActivity.this, StartScreen.class);
         startActivity(intent);
+        unityConn.close();
         finish();
     }
-
-
-
 }

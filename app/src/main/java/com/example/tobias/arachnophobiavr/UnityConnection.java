@@ -9,10 +9,6 @@ import java.net.InetAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Created by Julien on 01.10.2017.
- */
-
 class UnityConnection {
 
     private int DEBUG_LEVEL = 1;
@@ -22,20 +18,23 @@ class UnityConnection {
     private InetAddress address;
     private DatagramSocket sock;
 
-    private ReceiveThread rt;
+    private ReceiveDataUDP rdt;
     private ExecutorService cachedPool;
+
+    private volatile boolean receiving = false;
 
     private short lastReceived = -1;
 
     public void init(String ip) {
         setIp(ip);
         initSocket();
-        rt = new ReceiveThread();
-        rt.start();
+        receiving = true;
+        rdt = new ReceiveDataUDP();
+        rdt.start();
         cachedPool = Executors.newCachedThreadPool();
     }
 
-    public short receive() {
+    public short receiveData() {
         return lastReceived;
     }
 
@@ -44,8 +43,10 @@ class UnityConnection {
     }
 
     public void close() {
-        rt.interrupt();
+        receiving = false;
+        rdt.interrupt();
         sock.close();
+        sock = null;
     }
     private void setIp(String ip)
     {
@@ -75,14 +76,14 @@ class UnityConnection {
         }
     }
 
-    private class ReceiveThread extends Thread {
+    private class ReceiveDataUDP extends Thread {
 
         public void run() {
 
             byte message[];
             DatagramPacket packet;
 
-            while(!this.isInterrupted()) {
+            while(receiving) {
                 message = new byte[1];
                 packet = new DatagramPacket(message, message.length, address, port);
 
