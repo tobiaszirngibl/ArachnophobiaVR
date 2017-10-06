@@ -100,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
                 pflScore = Math.exp((Math.sqrt(distance) * distance) / 270) - 1;
                 break;
             case 1:
-                pflScore = Math.exp((distance/10) / 230) + (0.05*distance);
+                pflScore = Math.exp((Math.sqrt(distance) * distance) / 232) + (0.2*distance) + 5;
                 break;
             case 2:
-                pflScore = Math.exp((Math.sqrt(distance) * distance) / 232) - 5 + (0.2*distance);
+                pflScore = Math.exp(distance/10) / 230 + (0.05*distance);
                 break;
             default:
                 break;
