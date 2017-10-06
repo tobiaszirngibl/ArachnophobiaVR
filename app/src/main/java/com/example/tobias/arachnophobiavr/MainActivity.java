@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            fearLevelScore = calcPFL(unityConn.receiveData(), patient_type) - totalRewardScore;
+                            fearLevelScore = Math.max(0, calcPFL(unityConn.receiveData(), patient_type) - totalRewardScore);
                             fearLevel.setText(""+fearLevelScore);
                         }
                     });
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
         rs.stopCalming();
         currentRewardScore = rs.getFearRV();
-        totalRewardScore = totalRewardScore + currentRewardScore;
+        totalRewardScore = Math.min(100, totalRewardScore + currentRewardScore);
 
         totRewardLevel.setText(""+totalRewardScore);
         curRewardLevel.setText(""+currentRewardScore);
