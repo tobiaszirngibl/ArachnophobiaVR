@@ -7,13 +7,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StartScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner spinner;
     private TextView typeDesc;
+    private String ip_address;
+
+    private EditText ipText;
 
     private int patient_type;
 
@@ -21,6 +26,8 @@ public class StartScreen extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
+        ip_address = "";
+        ipText = (EditText) findViewById(R.id.ip_text);
         setupTypeDesc();
         setupSpinner();
     }
@@ -57,8 +64,20 @@ public class StartScreen extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void startClicked(View view) {
-        Intent intent = new Intent(StartScreen.this, MainActivity.class);
-        intent.putExtra("Type", patient_type);
-        startActivity(intent);
+        if(ip_address == "") {
+            Toast.makeText(getApplicationContext(), "Please set a ip address first!", Toast.LENGTH_LONG).show();
+        } else {
+
+            Intent intent = new Intent(StartScreen.this, MainActivity.class);
+            intent.putExtra("Type", patient_type);
+            intent.putExtra("IP", ip_address);
+            startActivity(intent);
+        }
+    }
+
+    public void setIpClicked(View view) {
+        ip_address = ipText.getText().toString();
+        Toast.makeText(getApplicationContext(), "IP Address set!", Toast.LENGTH_LONG).show();
+
     }
 }

@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private int currentRewardScore = 0;
     private int totalRewardScore = 0;
 
+    private String ip_address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
         syringeButton = (Button) findViewById(R.id.syringeButton);
         stopButton = (Button) findViewById(R.id.stopButton);
 
+        ip_address = getIntent().getStringExtra("IP");
         unityConn = new UnityConnection();
-        unityConn.init("192.168.137.1");
+        unityConn.init(ip_address);
         if (DEBUG_LEVEL > 0) Log.d("UNITY", "Success! Unity connection initialized!");
         unityConn.send(UNITY_ACTION_RESET_SPIDER);
         setDataToGraph();

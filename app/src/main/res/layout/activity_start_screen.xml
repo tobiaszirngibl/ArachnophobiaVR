@@ -11,14 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Virtual Therapy Session"
-        android:textSize="16pt"
-        android:layout_marginBottom="50dp"
+        android:textSize="12pt"
+        android:layout_marginBottom="30dp"
         android:textAlignment="center"/>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="10pt"
+        android:text="Set Unity Client IP Address:"
+        android:textSize="8pt"
+        android:layout_marginBottom="20dp" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+        <Button android:id="@+id/search_text"
+            android:layout_alignParentRight="true"
+            android:text="Set IP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="setIpClicked"/>
+        <EditText android:id="@+id/ip_text"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/search_text"
+            android:layout_centerVertical="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Client IP Address"
+            android:inputType="text"
+            android:maxLines="1" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="8pt"
         android:layout_marginBottom="5dp"
         android:text="Select Patient Type:" />
 
@@ -42,7 +72,7 @@
     <Button
         android:id="@+id/startSession"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:text="Start Session"
         android:textSize="8pt"
         android:onClick="startClicked"
