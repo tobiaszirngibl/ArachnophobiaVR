@@ -26,8 +26,10 @@ public class StartScreen extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-        ip_address = "";
+        String extraIP = getIntent().getStringExtra("EXTRA_IP");
+        ip_address = (extraIP != null) ? extraIP : "" ;
         ipText = (EditText) findViewById(R.id.ip_text);
+        ipText.setText(ip_address);
         setupTypeDesc();
         setupSpinner();
     }
@@ -78,6 +80,5 @@ public class StartScreen extends AppCompatActivity implements AdapterView.OnItem
     public void setIpClicked(View view) {
         ip_address = ipText.getText().toString();
         Toast.makeText(getApplicationContext(), "IP Address set!", Toast.LENGTH_LONG).show();
-
     }
 }

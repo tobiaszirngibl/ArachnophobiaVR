@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
     public void stopClicked(View view) {
         unityConn.send(UNITY_ACTION_REMOVE_SPIDER);
         Intent intent = new Intent(MainActivity.this, StartScreen.class);
+        intent.putExtra("EXTRA_IP", ip_address);
         startActivity(intent);
         unityConn.close();
         finish();
